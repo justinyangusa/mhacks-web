@@ -1,16 +1,16 @@
-import { SubscribePureActions } from '../pure';
-import { SubscribeRequests } from '../requests';
+import { AuthPureActions } from '../pure';
+import { AuthRequests } from '../requests';
 
-export default class SubscribeThunks {
-    static subscribe(email) {
+export default class AuthThunks {
+    static register(email, password) {
         return dispatch => {
-            dispatch(SubscribePureActions.subscribeRequest(email));
+            dispatch(AuthPureActions.registerRequest({ email, password }));
 
-            return SubscribeRequests.subscribe({ email }).then(response => {
+            return AuthRequests.register({ email, password }).then(response => {
                 if (response.status == 200) {
                     response.json().then(json => {
                         dispatch(
-                            SubscribePureActions.subscribeSuccess(
+                            AuthPureActions.registerSuccess(
                                 email,
                                 json.message
                             )
@@ -19,7 +19,7 @@ export default class SubscribeThunks {
                 } else {
                     response.json().then(json => {
                         dispatch(
-                            SubscribePureActions.subscribeError(
+                            AuthPureActions.registerError(
                                 email,
                                 response.status,
                                 json.message
