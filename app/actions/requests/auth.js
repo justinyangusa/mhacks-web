@@ -11,4 +11,14 @@ export default class AuthRequests {
             body: JSON.stringify(body)
         });
     }
+
+    static login(body) {
+        return fetch(endpoints.LOGIN, {
+            method: 'post',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(body)
+        });
+    }
 }
