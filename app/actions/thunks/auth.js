@@ -30,4 +30,33 @@ export default class AuthThunks {
             });
         };
     }
+
+    static login(email, password) {
+        return dispatch => {
+            dispatch(AuthPureActions.loginRequest({ email, password }));
+
+            return AuthRequests.login({ email, password }).then(response => {
+                if (response.status == 200) {
+                    response.json().then(json => {
+                        dispatch(
+                            AuthPureActions.loginSuccess(
+                                email,
+                                json.message
+                            )
+                        );
+                    });
+                } else {
+                    response.json().then(json => {
+                        dispatch(
+                            AuthPureActions.loginError(
+                                email,
+                                response.status,
+                                json.message
+                            )
+                        );
+                    });
+                }
+            });
+        };
+    }
 }

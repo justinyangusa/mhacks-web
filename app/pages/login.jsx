@@ -45,7 +45,7 @@ const RegistrationForm = (props) => (
 );
 
 /* Page Component */
-class Register extends React.Component {
+class Login extends React.Component {
     constructor() {
         super();
 
@@ -70,7 +70,7 @@ class Register extends React.Component {
     onSubmit(e) {
         e.preventDefault();
 
-        this.props.dispatch(AuthThunks.register(this.state.email, this.state.password));
+        this.props.dispatch(AuthThunks.login(this.state.email, this.state.password));
     }
 
     render() {
@@ -97,4 +97,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(Login);

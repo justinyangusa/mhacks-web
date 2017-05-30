@@ -11,7 +11,7 @@ import thunkMiddleware from 'redux-thunk';
 
 import reducers from './reducers';
 import { routes } from './constants';
-import { Navigator, BlackoutPage, Register, HomePage } from './pages';
+import { Navigator, BlackoutPage, Login, HomePage } from './pages';
 
 /* uncomment to view redux logs in console */
 // import logger from 'redux-logger'
@@ -39,8 +39,8 @@ render(
                     />
                     <Route
                         exact
-                        path={routes.REGISTER}
-                        component={Register}
+                        path={routes.LOGIN}
+                        component={Login}
                     />
                     <Route
                         component={BlackoutPage}

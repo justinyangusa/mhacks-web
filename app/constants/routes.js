@@ -2,5 +2,5 @@
 export default {
     HOME: '/',
     SUBSCRIBE: '/subscribe',
-    REGISTER: '/register'
+    LOGIN: '/login'
 };

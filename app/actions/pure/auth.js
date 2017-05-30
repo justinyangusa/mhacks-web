@@ -24,4 +24,28 @@ export default class AuthPureActions {
             message
         };
     }
+
+    static loginRequest(data) {
+        return {
+            type: reduxActions.LOGIN_REQUEST,
+            data
+        };
+    }
+
+    static loginError(data, error, message) {
+        return {
+            type: reduxActions.LOGIN_ERROR,
+            data,
+            error,
+            message
+        };
+    }
+
+    static loginSuccess(data, message) {
+        return {
+            type: reduxActions.LOGIN_SUCCESS,
+            data,
+            message
+        };
+    }
 }
