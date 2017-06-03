@@ -38,6 +38,7 @@ export default class AuthThunks {
             return AuthRequests.login({ email, password }).then(response => {
                 if (response.status == 200) {
                     response.json().then(json => {
+                        console.log('HERE BITCH', json);
                         dispatch(
                             AuthPureActions.loginSuccess(
                                 email,
