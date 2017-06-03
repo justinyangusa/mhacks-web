@@ -8,83 +8,103 @@ import { connect } from 'react-redux';
 const Page = styled.div`
 `;
 
-const Form = styled.div`
+const FormContainer = styled.div`
     backgroundColor: salmon;
     padding: 40px;
     maxWidth: 600px;
     margin: 40px auto;
 `;
 
-const RegistrationForm = (props) => (
-    <div>
-        <h1>Sign Up</h1>
-        <form onSubmit={props.onSubmit}>
-            <label htmlFor="email">
-                Email
-                <input
-                    id="email"
-                    type="email"
-                    placeholder="hacker@umich.edu"
-                    value={props.email}
-                    onChange={props.onEmailChange}
-                />
-            </label>
-            <label htmlFor="password">
-                Password
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="hunter2"
-                    value={props.password}
-                    onChange={props.onPasswordChange}
-                />
-            </label>
-            <button type="submit">Register</button>
-        </form>
-    </div>
-);
+const FormTypeButton = styled.button`
 
-/* Page Component */
+`;
+
+/* Login Component */
 class Login extends React.Component {
     constructor() {
         super();
 
         this.state = {
+            name: '',
             email: '',
-            password: ''
+            password: '',
+            isRegistering: true
         };
     }
 
-    emailChange(e) {
+    // Generic function for changing state
+    // -- input using this must have a name attribute
+    handleAttributeChange(e) {
         this.setState({
-            email: e.target.value
-        });
-    }
-
-    passwordChange(e) {
-        this.setState({
-            password: e.target.value
-        });
+            [e.target.name]: e.target.value
+        })
     }
 
     onSubmit(e) {
         e.preventDefault();
 
-        this.props.dispatch(AuthThunks.login(this.state.email, this.state.password));
+        if (this.state.isRegistering) {
+            this.props.dispatch(AuthThunks.register(this.state.name, this.state.email, this.state.password));
+        } else {
+            this.props.dispatch(AuthThunks.login(this.state.email, this.state.password));
+        }
+    }
+
+    toggleFormType() {
+        this.setState({
+            isRegistering: !this.state.isRegistering
+        });
     }
 
     render() {
         return (
             <Page>
-                <Form>
-                    <RegistrationForm
-                        email={this.state.email}
-                        password={this.state.password}
-                        onEmailChange={this.emailChange.bind(this)}
-                        onPasswordChange={this.passwordChange.bind(this)}
-                        onSubmit={this.onSubmit.bind(this)}
-                    />
-                </Form>
+                <FormContainer>
+                    <h1>Sign Up</h1>
+                    <form onSubmit={this.onSubmit.bind(this)}>
+                        {this.state.isRegistering ?
+                            <label>
+                                Name
+                                <input
+                                    id="name"
+                                    type="text"
+                                    name="name"
+                                    placeholder="Hacker mcHackerface"
+                                    value={this.state.name}
+                                    onChange={this.handleAttributeChange.bind(this)}
+                                />
+                            </label> :
+                            undefined
+                        }
+                        <label htmlFor="email">
+                            Email
+                            <input
+                                id="email"
+                                type="email"
+                                name="email"
+                                placeholder="hacker@umich.edu"
+                                value={this.state.email}
+                                onChange={this.handleAttributeChange.bind(this)}
+                            />
+                        </label>
+                        <label htmlFor="password">
+                            Password
+                            <input
+                                id="password"
+                                type="password"
+                                name="password"
+                                placeholder="hunter2"
+                                value={this.state.password}
+                                onChange={this.handleAttributeChange.bind(this)}
+                            />
+                        </label>
+                        <button type="submit">{this.state.isRegistering ? 'Register' : 'Log In'}</button>
+                    </form>
+                </FormContainer>
+
+                <FormTypeButton onClick={this.toggleFormType.bind(this)}>
+                    {this.state.isRegistering ? 'Log In' : 'Register'}
+                </FormTypeButton>
             </Page>
         );
     }
@@ -92,7 +112,7 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        status: state.subscribeState,
+        status: state.authState,
         theme: state.theme.data
     };
 }

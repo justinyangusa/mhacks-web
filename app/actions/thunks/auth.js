@@ -2,16 +2,26 @@ import { AuthPureActions } from '../pure';
 import { AuthRequests } from '../requests';
 
 export default class AuthThunks {
-    static register(email, password) {
+    static register(name, email, password) {
         return dispatch => {
-            dispatch(AuthPureActions.registerRequest({ email, password }));
+            dispatch(
+                AuthPureActions.registerRequest({ name, email, password })
+            );
 
-            return AuthRequests.register({ email, password }).then(response => {
+            return AuthRequests.register({
+                full_name: name,
+                email,
+                password
+            }).then(response => {
                 if (response.status == 200) {
                     response.json().then(json => {
                         dispatch(
                             AuthPureActions.registerSuccess(
-                                email,
+                                {
+                                    name,
+                                    email,
+                                    token: json.token
+                                },
                                 json.message
                             )
                         );
@@ -38,10 +48,12 @@ export default class AuthThunks {
             return AuthRequests.login({ email, password }).then(response => {
                 if (response.status == 200) {
                     response.json().then(json => {
-                        console.log('HERE BITCH', json);
                         dispatch(
                             AuthPureActions.loginSuccess(
-                                email,
+                                {
+                                    email,
+                                    token: json.token
+                                },
                                 json.message
                             )
                         );
