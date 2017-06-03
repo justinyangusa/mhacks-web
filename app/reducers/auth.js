@@ -1,7 +1,7 @@
 import { reduxActions } from '../constants';
 import { objectState } from './initial_states.js';
 
-export function subscribeState(state = objectState, action) {
+export function authState(state = objectState, action) {
     switch (action.type) {
         case reduxActions.LOGIN_REQUEST:
             return {
