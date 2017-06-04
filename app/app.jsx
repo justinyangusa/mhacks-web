@@ -11,7 +11,7 @@ import thunkMiddleware from 'redux-thunk';
 
 import reducers from './reducers';
 import { routes } from './constants';
-import { Navigator, BlackoutPage } from './pages';
+import { Navigator, BlackoutPage, ChatPage } from './pages';
 
 /* uncomment to view redux logs in console */
 // import logger from 'redux-logger'
@@ -36,6 +36,11 @@ render(
                         exact
                         path={routes.SUBSCRIBE}
                         component={BlackoutPage}
+                    />
+                    <Route
+                        exact
+                        path={routes.CHAT}
+                        component={ChatPage}
                     />
                     <Route
                         component={BlackoutPage}
