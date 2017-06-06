@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Container } from '../../components';
+import { Container } from './section_components';
 import { devices } from '../../styles';
 
 const HeaderLogoImage = require('../../../static/icons/blackout-logo.png');

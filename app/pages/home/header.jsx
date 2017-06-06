@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const HeaderLogoImage = require('../../../static/icons/blackout-logo.png');
+import { Container } from '../../components';
+
+const HeaderLogoImage = require('../../../static/icons/nano-logo.png');
 
 /* Header Section */
-const HeaderWrapper = styled.div`
+const Wrapper = styled.div`
     position: fixed;
-    top: 0;
+    top: 60px;
     left: 0;
     right: 0;
 
@@ -16,25 +18,66 @@ const HeaderWrapper = styled.div`
     justifyContent: flex-start;
 `;
 
-const HeaderLogoWrapper = styled.div`
+const FlexWrapper = styled.div`
     display: flex;
     alignItems: center;
+    justifyContent: space-between;
     height: 90%;
 `;
 
-const HeaderLogo = styled.img`
+const Logo = styled.img`
     height: 90px;
     display: block;
 `;
 
+const NavContainer = styled.div`
+    display: flex;
+    alignItems: center;
+    justifyContent: flex-end;
+`;
+
+const NavLink = styled.a`
+    fontSize: 20px;
+    padding: 5px 35px;
+    margin: 0px 15px;
+    border: 2px solid darkorange;
+    color: darkorange;
+    borderRadius: 5px;
+    textDecoration: none;
+    transition: all 0.3s;
+
+    &:hover {
+        backgroundColor: darkorange;
+        color: white;
+    }
+
+    &:last-child {
+        margin: 0;
+    }
+`;
+
 class Header extends React.Component {
     render() {
+        const { isLoggedIn, isApplied } = this.props;
+
         return (
-            <HeaderWrapper>
-                <HeaderLogoWrapper>
-                    <HeaderLogo src={HeaderLogoImage} />
-                </HeaderLogoWrapper>
-            </HeaderWrapper>
+            <Wrapper>
+                <Container>
+                    <FlexWrapper>
+                        <Logo src={HeaderLogoImage} />
+                        <NavContainer>
+                            {isApplied ?
+                                null :
+                                <NavLink href="#">Apply</NavLink>
+                            }
+                            {isLoggedIn ?
+                                null :
+                                <NavLink href="#">Log In</NavLink>
+                            }
+                        </NavContainer>
+                    </FlexWrapper>
+                </Container>
+            </Wrapper>
         );
     }
 }

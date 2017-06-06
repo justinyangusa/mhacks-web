@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { devices } from '../../styles';
-import { TextSubmit, Container, VideoPlayer } from '../../components';
+import { TextSubmit, VideoPlayer } from '../../components';
+import { Container } from './section_components';
 import { SubscribeThunks } from '../../actions';
 import { routes } from '../../constants';
 import { connect } from 'react-redux';

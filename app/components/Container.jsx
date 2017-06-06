@@ -3,7 +3,6 @@ import { devices } from '../styles';
 
 const Container = styled.div`
     width: calc(100% - 60px);
-    maxWidth: 1200px;
     margin: 0 auto;
 
     ${devices.tablet`
@@ -15,7 +14,7 @@ const Container = styled.div`
     `}
 
     ${devices.giant`
-        width: calc(100% - 160px);
+        width: calc(100% - 200px);
     `}
 `;
 

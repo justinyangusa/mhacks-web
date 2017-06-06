@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SectionHeader, SectionBody } from './section_components.jsx';
 
-import { Container } from '../../components';
+import { Container } from './section_components';
 import { devices } from '../../styles';
 
 const OrbImage = require('../../../static/blackout/orb-2.png');
