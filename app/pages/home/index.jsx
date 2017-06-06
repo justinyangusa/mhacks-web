@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
+import { connect } from 'react-redux';
 
 const Favicon = require('../../../static/blackout/favicon.png');
 
@@ -87,7 +88,7 @@ class HomePage extends React.Component {
 
                 <Header
                     isApplied={false}
-                    isLoggedIn={true}
+                    isLoggedIn={this.props.auth.email}
                 />
 
                 <Container {...this.state}>
@@ -130,4 +131,11 @@ class HomePage extends React.Component {
     }
 }
 
-export default HomePage;
+function mapStateToProps(state) {
+    return {
+        auth: state.authState,
+        theme: state.theme.data
+    };
+}
+
+export default connect(mapStateToProps)(HomePage);
