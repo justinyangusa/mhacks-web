@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 
+import { OutlineTextField } from '../../components';
+
 const Favicon = require('../../../static/blackout/favicon.png');
 
 import Header from './header.jsx';
@@ -94,6 +96,7 @@ class HomePage extends React.Component {
                                 <SidebarLink><a href="#section-about">About MHacks</a></SidebarLink>
                                 <SidebarLink><a href="#section-what-is-nano">MHacks Nano</a></SidebarLink>
                                 <SidebarLink><a href="#section-faq">FAQ</a></SidebarLink>
+                                <SidebarLink><a href="#section-apply">Apply</a></SidebarLink>
                             </SidebarLinks>
                         </nav>
                     </Sidebar>
@@ -116,6 +119,14 @@ class HomePage extends React.Component {
                             MHacks is a 36-hour hackathon run by University of Michigan students. At MHacks, we want to help you turn your ideas into reality. You're welcome to come with or without a team. We'll provide you with all the resources and mentors you need to help you work on something cool or learn new skills. You'll have the freedom to create a product, learn new techniques for your future work, or just have fun working on a project with friends. Moreover, we will offer you a chance to network with other creators and professionals. For newcomers and veterans alike, MHacks is a weekend experience you won’t want to miss.
 
                             MHacks is a 36-hour hackathon run by University of Michigan students. At MHacks, we want to help you turn your ideas into reality. You're welcome to come with or without a team. We'll provide you with all the resources and mentors you need to help you work on something cool or learn new skills. You'll have the freedom to create a product, learn new techniques for your future work, or just have fun working on a project with friends. Moreover, we will offer you a chance to network with other creators and professionals. For newcomers and veterans alike, MHacks is a weekend experience you won’t want to miss.
+                            </SectionBody>
+                        </div>
+                        <div id="apply">
+                            <SectionHeader>Apply</SectionHeader>
+                            <SectionBody>
+                                <OutlineTextField 
+                                    
+                                />
                             </SectionBody>
                         </div>
                     </Content>
