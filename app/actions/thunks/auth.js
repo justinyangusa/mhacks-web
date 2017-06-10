@@ -20,7 +20,8 @@ export default class AuthThunks {
                                 {
                                     name,
                                     email,
-                                    token: json.token
+                                    token: json.token,
+                                    isLoggedIn: true
                                 },
                                 json.message
                             )
@@ -52,7 +53,8 @@ export default class AuthThunks {
                             AuthPureActions.loginSuccess(
                                 {
                                     email,
-                                    token: json.token
+                                    token: json.token,
+                                    isLoggedIn: true
                                 },
                                 json.message
                             )

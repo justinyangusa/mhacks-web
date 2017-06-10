@@ -1,22 +1,56 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AuthThunks } from '../actions';
+import { TabGroup } from '../components';
 
 import { connect } from 'react-redux';
+
+import { routes } from '../constants';
 
 /* Containers */
 const Page = styled.div`
 `;
 
 const FormContainer = styled.div`
-    backgroundColor: salmon;
-    padding: 40px;
     maxWidth: 600px;
     margin: 40px auto;
 `;
 
-const FormTypeButton = styled.button`
+const SubmitButton = styled.button`
+    padding: 10px 0;
+    borderRadius: 20px;
+    backgroundColor: transparent;
+    color: ${props => props.color};
+    fontWeight: 500;
+    fontSize: 16px;
+    padding: 8px 60px;
+    border: 3px solid ${props => props.color};
 
+    &:hover {
+        backgroundColor: ${props => props.color};
+        color: white;
+    }
+`;
+
+const Flexer = styled.div`
+    display: flex;
+    flexDirection: column;
+`;
+
+const InputContainer = styled.div`
+    margin: 30px 0;
+
+    input {
+        width: 100%;
+        margin: 10px 0;
+        padding: 8px;
+    }
+`;
+
+const ButtonGroup = styled.div`
+    display: flex;
+    flexDirection: row;
+    justifyContent: space-between;
 `;
 
 /* Login Component */
@@ -30,6 +64,14 @@ class Login extends React.Component {
             password: '',
             isRegistering: true
         };
+
+        this.toggleFormType = this.toggleFormType.bind(this);
+    }
+
+    componentWillUpdate(nextProps) {
+        if (nextProps.authState.data.isLoggedIn) {
+            this.props.history.push(routes.SUBSCRIBE);
+        }
     }
 
     // Generic function for changing state
@@ -60,59 +102,72 @@ class Login extends React.Component {
         return (
             <Page>
                 <FormContainer>
-                    <h1>Sign Up</h1>
+                    <TabGroup
+                        tabs={[{
+                            title: 'Sign Up',
+                            onClick: this.toggleFormType
+                        }, {
+                            title: 'Log In',
+                            onClick: this.toggleFormType
+                        }]}
+                        primaryColor={this.props.theme.primary}
+                    />
                     <form onSubmit={this.onSubmit.bind(this)}>
-                        {this.state.isRegistering ?
-                            <label>
-                                Name
+                        <Flexer>
+                            <InputContainer>
+                                {this.state.isRegistering ?
+                                    <input
+                                        id="name"
+                                        type="text"
+                                        name="name"
+                                        placeholder="Hacker mcHackerface"
+                                        value={this.state.name}
+                                        onChange={this.handleAttributeChange.bind(this)}
+                                    /> :
+                                    undefined
+                                }
                                 <input
-                                    id="name"
-                                    type="text"
-                                    name="name"
-                                    placeholder="Hacker mcHackerface"
-                                    value={this.state.name}
+                                    id="email"
+                                    type="email"
+                                    name="email"
+                                    placeholder="hacker@umich.edu"
+                                    value={this.state.email}
                                     onChange={this.handleAttributeChange.bind(this)}
                                 />
-                            </label> :
-                            undefined
-                        }
-                        <label htmlFor="email">
-                            Email
-                            <input
-                                id="email"
-                                type="email"
-                                name="email"
-                                placeholder="hacker@umich.edu"
-                                value={this.state.email}
-                                onChange={this.handleAttributeChange.bind(this)}
-                            />
-                        </label>
-                        <label htmlFor="password">
-                            Password
-                            <input
-                                id="password"
-                                type="password"
-                                name="password"
-                                placeholder="hunter2"
-                                value={this.state.password}
-                                onChange={this.handleAttributeChange.bind(this)}
-                            />
-                        </label>
-                        <button type="submit">{this.state.isRegistering ? 'Register' : 'Log In'}</button>
+                                <input
+                                    id="password"
+                                    type="password"
+                                    name="password"
+                                    placeholder="hunter2"
+                                    value={this.state.password}
+                                    onChange={this.handleAttributeChange.bind(this)}
+                                />
+                            </InputContainer>
+                            <ButtonGroup>
+                                <SubmitButton
+                                    type="submit"
+                                    color={this.props.theme.primary}
+                                >
+                                Confirm
+                                </SubmitButton>
+                            </ButtonGroup>
+                        </Flexer>
                     </form>
                 </FormContainer>
-
-                <FormTypeButton onClick={this.toggleFormType.bind(this)}>
-                    {this.state.isRegistering ? 'Log In' : 'Register'}
-                </FormTypeButton>
             </Page>
         );
     }
 }
 
+Login.contextTypes = {
+    router: React.PropTypes.shape({
+        history: React.PropTypes.object.isRequired,
+    })
+};
+
 function mapStateToProps(state) {
     return {
-        status: state.authState,
+        authState: state.authState,
         theme: state.theme.data
     };
 }
