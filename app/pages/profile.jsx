@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { RoundedButton } from '../components';
+import { RoundedButton, FileUpload } from '../components';
 
 /* Containers */
 const Page = styled.div`
@@ -25,12 +25,12 @@ const Flexer = styled.div`
 
 const InputContainer = styled.div`
     margin: 30px 0;
+`;
 
-    input {
-        width: 100%;
-        margin: 10px 0;
-        padding: 8px;
-    }
+const Input = styled.input`
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
 `;
 
 const ButtonGroup = styled.div`
@@ -39,19 +39,26 @@ const ButtonGroup = styled.div`
     justifyContent: space-between;
 `;
 
-/* Login Component */
-class Login extends React.Component {
+const SectionHeader = styled.h2`
+    fontSize: 40px;
+    color: ${props => props.color};
+    fontWeight: 500;
+    margin: 0;
+`;
+
+class Profile extends React.Component {
     constructor() {
         super();
 
         this.state = {
             birthday: '',
             university: '',
-            major: ''
+            focus: ''
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.handleAttributeChange = this.handleAttributeChange.bind(this);
+        this.handleFileUpload = this.handleFileUpload.bind(this);
     }
 
     // Generic function for changing state
@@ -59,7 +66,13 @@ class Login extends React.Component {
     handleAttributeChange(e) {
         this.setState({
             [e.target.name]: e.target.value
-        })
+        });
+    }
+
+    handleFileUpload(file) {
+        this.setState({
+            resume: file
+        });
     }
 
     onSubmit(e) {
@@ -72,10 +85,11 @@ class Login extends React.Component {
         return (
             <Page>
                 <FormContainer>
+                    <SectionHeader color={this.props.theme.primary}>Profile</SectionHeader>
                     <form onSubmit={this.onSubmit}>
                         <Flexer>
                             <InputContainer>
-                                <input
+                                <Input
                                     id="birthday"
                                     type="text"
                                     name="birthday"
@@ -83,7 +97,7 @@ class Login extends React.Component {
                                     value={this.state.birthday}
                                     onChange={this.handleAttributeChange}
                                 />
-                                <input
+                                <Input
                                     id="university"
                                     type="text"
                                     name="university"
@@ -91,13 +105,19 @@ class Login extends React.Component {
                                     value={this.state.university}
                                     onChange={this.handleAttributeChange}
                                 />
-                                <input
-                                    id="major"
+                                <Input
+                                    id="focus"
                                     type="text"
-                                    name="major"
+                                    name="focus"
                                     placeholder="Underwater Basket Weaving"
-                                    value={this.state.major}
+                                    value={this.state.focus}
                                     onChange={this.handleAttributeChange}
+                                />
+                                <FileUpload
+                                    defaultColor={this.props.theme.primary}
+                                    hoverColor={this.props.theme.secondary}
+                                    activeColor={this.props.theme.success}
+                                    onFileSelect={this.handleFileUpload}
                                 />
                             </InputContainer>
                             <ButtonGroup>
@@ -123,4 +143,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Profile);

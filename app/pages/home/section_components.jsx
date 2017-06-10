@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const SectionHeader = styled.h2`
     fontSize: 40px;
-    color: darkorange;
+    color: ${props => props.color};
     fontWeight: 400;
 `;
 
