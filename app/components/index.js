@@ -4,6 +4,7 @@ import Container from './Container.jsx';
 import VideoPlayer from './VideoPlayer.jsx';
 import ExpandingItem from './ExpandingItem.jsx';
 import TabGroup from './TabGroup.jsx';
+import RoundedButton from './RoundedButton.jsx';
 
 export {
     TextSubmit,
@@ -11,5 +12,6 @@ export {
     Container,
     VideoPlayer,
     ExpandingItem,
-    TabGroup
+    TabGroup,
+    RoundedButton
 };

@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AuthThunks } from '../actions';
-import { TabGroup } from '../components';
-
 import { connect } from 'react-redux';
-
 import { routes } from '../constants';
+
+import { TabGroup, RoundedButton } from '../components';
 
 /* Containers */
 const Page = styled.div`
@@ -19,22 +18,6 @@ const FormContainer = styled.div`
     width: 500px;
     maxWidth: calc(100% - 40px);
     margin: 40px auto;
-`;
-
-const SubmitButton = styled.button`
-    padding: 10px 0;
-    borderRadius: 20px;
-    backgroundColor: transparent;
-    color: ${props => props.color};
-    fontWeight: 500;
-    fontSize: 16px;
-    padding: 8px 60px;
-    border: 3px solid ${props => props.color};
-
-    &:hover {
-        backgroundColor: ${props => props.color};
-        color: white;
-    }
 `;
 
 const Flexer = styled.div`
@@ -152,12 +135,12 @@ class Login extends React.Component {
                                 />
                             </InputContainer>
                             <ButtonGroup>
-                                <SubmitButton
+                                <RoundedButton
                                     type="submit"
                                     color={this.props.theme.primary}
                                 >
                                 Confirm
-                                </SubmitButton>
+                                </RoundedButton>
                             </ButtonGroup>
                         </Flexer>
                     </form>
@@ -166,12 +149,6 @@ class Login extends React.Component {
         );
     }
 }
-
-Login.contextTypes = {
-    router: React.PropTypes.shape({
-        history: React.PropTypes.object.isRequired,
-    })
-};
 
 function mapStateToProps(state) {
     return {
