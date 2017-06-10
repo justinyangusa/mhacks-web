@@ -9,10 +9,15 @@ import { routes } from '../constants';
 
 /* Containers */
 const Page = styled.div`
+    display: flex;
+    alignItems: center;
+    justifyContent: center;
+    height: 100vh;
 `;
 
 const FormContainer = styled.div`
-    maxWidth: 600px;
+    width: 500px;
+    maxWidth: calc(100% - 40px);
     margin: 40px auto;
 `;
 
@@ -65,7 +70,7 @@ class Login extends React.Component {
             isRegistering: true
         };
 
-        this.toggleFormType = this.toggleFormType.bind(this);
+        this.tabSelect = this.tabSelect.bind(this);
     }
 
     componentWillUpdate(nextProps) {
@@ -92,10 +97,13 @@ class Login extends React.Component {
         }
     }
 
-    toggleFormType() {
-        this.setState({
-            isRegistering: !this.state.isRegistering
-        });
+    tabSelect(index) {
+        if (this.state.isRegistering === true && index !== 0 ||
+            this.state.isRegistering === false && index !== 1) {
+                this.setState({
+                    isRegistering: !this.state.isRegistering
+                });
+            }
     }
 
     render() {
@@ -105,10 +113,10 @@ class Login extends React.Component {
                     <TabGroup
                         tabs={[{
                             title: 'Sign Up',
-                            onClick: this.toggleFormType
+                            onClick: this.tabSelect
                         }, {
                             title: 'Log In',
-                            onClick: this.toggleFormType
+                            onClick: this.tabSelect
                         }]}
                         primaryColor={this.props.theme.primary}
                     />

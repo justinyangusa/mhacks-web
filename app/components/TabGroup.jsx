@@ -49,7 +49,7 @@ class TabGroup extends React.Component {
             this.setState({
                 activeIndex: index
             });
-            func();
+            func(index);
         }
     }
 
