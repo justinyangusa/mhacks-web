@@ -95,7 +95,7 @@ class Profile extends React.Component {
                             <InputContainer>
                                 <Input
                                     id="birthday"
-                                    type="text"
+                                    type="date"
                                     name="birthday"
                                     placeholder="01/01/1970"
                                     value={this.state.birthday}
