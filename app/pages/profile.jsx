@@ -24,7 +24,7 @@ const Flexer = styled.div`
 `;
 
 const InputContainer = styled.div`
-    margin: 30px 0;
+    margin: 20px 0 30px 0;
 `;
 
 const Input = styled.input`
@@ -44,6 +44,10 @@ const SectionHeader = styled.h2`
     color: ${props => props.color};
     fontWeight: 500;
     margin: 0;
+`;
+
+const FileUploadContainer = styled.div`
+    marginTop: 10px;
 `;
 
 class Profile extends React.Component {
@@ -113,12 +117,14 @@ class Profile extends React.Component {
                                     value={this.state.focus}
                                     onChange={this.handleAttributeChange}
                                 />
-                                <FileUpload
-                                    defaultColor={this.props.theme.primary}
-                                    hoverColor={this.props.theme.secondary}
-                                    activeColor={this.props.theme.success}
-                                    onFileSelect={this.handleFileUpload}
-                                />
+                                <FileUploadContainer>
+                                    <FileUpload
+                                        defaultColor={this.props.theme.primary}
+                                        hoverColor={this.props.theme.secondary}
+                                        activeColor={this.props.theme.success}
+                                        onFileSelect={this.handleFileUpload}
+                                    />
+                                </FileUploadContainer>
                             </InputContainer>
                             <ButtonGroup>
                                 <RoundedButton
